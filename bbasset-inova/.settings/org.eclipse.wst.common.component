@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="spring-mvc-angularjs">
+    <wb-module deploy-name="bbasset-inova">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <property name="java-output-path" value="/bbasset-inova/target/classes"/>
-        <property name="context-root" value="spring-mvc-angularjs"/>
+        <property name="context-root" value="bbasset-inova"/>
     </wb-module>
 </project-modules>
