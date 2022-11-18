@@ -177,8 +177,7 @@ public class FundoInvestimentoImpl implements FundoInvestimentoDao {
 		
 		String mes = "zz";
 		String mesPosterior = "aa";
-				
-		
+						
 		int i = 0;
 		
 		while (i <= cotacoesPorFundo.size() - 1) {
