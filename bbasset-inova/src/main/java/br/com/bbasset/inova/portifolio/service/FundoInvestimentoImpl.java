@@ -44,7 +44,8 @@ public class FundoInvestimentoImpl implements FundoInvestimentoDao {
 		
 		final List<CotacaoFundoInvestimento> listCotacoes = getCotacoesFundosInvestimentos();
 		
-		String query = "SELECT codFundoInvestimento, nomeFundoInvestimento, cnpjFundoInvestimento, dataAberturaFundoInvestimento,"
+		String query = "SELECT codFundoInvestimento, nomeFundoInvestimento, "
+				+ "cnpjFundoInvestimento, dataAberturaFundoInvestimento,"
 				+ "dataEncerramentoFundoInvestimento, riscoFundoInvestimento "
 				+ "FROM bbassetinova.fundoinvestimento WHERE (riscoFundoInvestimento = ?)";
 
