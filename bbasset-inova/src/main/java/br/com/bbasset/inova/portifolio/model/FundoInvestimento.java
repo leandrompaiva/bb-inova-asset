@@ -20,9 +20,9 @@ public class FundoInvestimento {
 
 	private String statusFundo;
 	
-	
-	
-	
+	public FundoInvestimento() {
+		super();
+	}
 
 	public Long getCodFundoInvestimento() {
 		return codFundoInvestimento;
@@ -119,5 +119,7 @@ public class FundoInvestimento {
 	public void setNumMesesNegativo(String numMesesNegativo) {
 		this.numMesesNegativo = numMesesNegativo;
 	}
+	
+	
 
 }

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +39,9 @@ public class FundoInvestimentoImpl implements FundoInvestimentoDao {
 	
 	
 	
-
+	// ############## ############## ############## ############## 
+	// PEGA FUNDOS POR PERFIL 
+	// ############## ############## ############## ############## 	
 	@Override
 	public List<FundoInvestimento> getFundoInvestimentoPorPerfil(String perfil) {
 		
@@ -78,13 +81,13 @@ public class FundoInvestimentoImpl implements FundoInvestimentoDao {
 					}
 					
 					
-					Map<String,String> pegaRetornoFundo = getRetornoFundo(rs.getLong("codFundoInvestimento"), listCotacoes);
+					Map<String,Object> pegaRetornoFundo = getRetornoFundo(rs.getLong("codFundoInvestimento"), listCotacoes);
 					
-					fundoInvestimento.setRetorno12Meses(pegaRetornoFundo.get("retorno12Meses"));
-					fundoInvestimento.setMaiorRetornoMensal(pegaRetornoFundo.get("maiorRetornoMensal"));
-					fundoInvestimento.setMenorRetornoMensal(pegaRetornoFundo.get("menorRetornoMensal"));
-					fundoInvestimento.setNumMesesPositivo(pegaRetornoFundo.get("numMesesPositivo"));
-					fundoInvestimento.setNumMesesNegativo(pegaRetornoFundo.get("numMesesNegativo"));
+					fundoInvestimento.setRetorno12Meses((String)pegaRetornoFundo.get("retorno12Meses"));
+					fundoInvestimento.setMaiorRetornoMensal((String)pegaRetornoFundo.get("maiorRetornoMensal"));
+					fundoInvestimento.setMenorRetornoMensal((String)pegaRetornoFundo.get("menorRetornoMensal"));
+					fundoInvestimento.setNumMesesPositivo((String)pegaRetornoFundo.get("numMesesPositivo"));
+					fundoInvestimento.setNumMesesNegativo((String)pegaRetornoFundo.get("numMesesNegativo"));
 							
 					return fundoInvestimento;
 				}
@@ -105,7 +108,9 @@ public class FundoInvestimentoImpl implements FundoInvestimentoDao {
 	
 	
 	
-	
+	// ############## ############## ############## ############## 
+	// CARREGA TODAS AS COTACOES DISPONIVEIS (FAZ CALCULOS EM MEMORIA)
+	// ############## ############## ############## ############## 		
 	@Override
 	public List<CotacaoFundoInvestimento> getCotacoesFundosInvestimentos() {
 		
@@ -144,11 +149,18 @@ public class FundoInvestimentoImpl implements FundoInvestimentoDao {
 		
 	}	
 	
+
 	
-	
-	private Map<String, String> getRetornoFundo(long codigoFundo, List<CotacaoFundoInvestimento> listCotacoes) {
+	// ############## ############## ############## ############## 
+	// RETORNA DADOS ECONOMICOS REN/ DE UM DETERMINADO FUNDO
+	// ############## ############## ############## ############## 		
+	@Override
+	public Map<String, Object> getRetornoFundo(long codigoFundo, List<CotacaoFundoInvestimento> listCotacoes) {
 		
-		Map<String,String> retornaAnaliseFundo = new LinkedHashMap<String,String>();
+		Map<String, Object> retornaAnaliseFundo = new LinkedHashMap<String, Object>();
+		
+		
+		Map<String,Double> getRentabilidadeMesAmes = new LinkedHashMap<String,Double>();
 		
 		List<CotacaoFundoInvestimento> cotacoesPorFundo = new ArrayList<CotacaoFundoInvestimento>();
 		
@@ -187,6 +199,11 @@ public class FundoInvestimentoImpl implements FundoInvestimentoDao {
 			if (!mes.equalsIgnoreCase(mesPosterior)) {
 
 				rentabilidadeMes = (((cotacaoFinalMes / cotacaoInicialMes) - 1) * 100);
+				
+				// GUARDA RENTABILIDADE MES A MES
+				if (i>1) {
+					getRentabilidadeMesAmes.put(cotacoesPorFundo.get(i-1).getMesAnoCota(), rentabilidadeMes);
+				}
 
 				cotacaoInicialMes = cotacoesPorFundo.get(i).getValorCota();
 				mesPosterior = cotacoesPorFundo.get(i).getMesCota();
@@ -219,7 +236,7 @@ public class FundoInvestimentoImpl implements FundoInvestimentoDao {
 		retornaAnaliseFundo.put("menorRetornoMensal", round(Double.valueOf(menorRetornoMensal),2)+"%");
 		retornaAnaliseFundo.put("numMesesPositivo", String.valueOf(numMesesPositivo));
 		retornaAnaliseFundo.put("numMesesNegativo",  String.valueOf(numMesesNegativo));
-		
+		retornaAnaliseFundo.put("rentabilidadePorMes", getRentabilidadeMesAmes);
 		
 		return retornaAnaliseFundo;
 		
@@ -229,7 +246,9 @@ public class FundoInvestimentoImpl implements FundoInvestimentoDao {
 
 
 
-
+	// ############## ############## ############## ############## 
+	// RETORNA VALOR COTA ESPECIFICAS DE UM FUNDO 
+	// ############## ############## ############## ############## 	
 	@Override
 	public List<CotacaoFundoInvestimento> getCotacoesPorCodFundo(Long codFundo) {
 		
@@ -274,7 +293,9 @@ public class FundoInvestimentoImpl implements FundoInvestimentoDao {
 	
 	
 	
-	
+	// ############## ############## ############## ############## 
+	// AUXILIARES 
+	// ############## ############## ############## ############## 		
 	private static String format(String pattern, Object value) {
 		MaskFormatter mask;
 		try {
@@ -288,14 +309,21 @@ public class FundoInvestimentoImpl implements FundoInvestimentoDao {
 	}
 	
 	
+	// ############## ############## ############## ############## 
+	// AUXILIARES 
+	// ############## ############## ############## ############## 		
 	public static double round(double value, int places) {
 	    if (places < 0) throw new IllegalArgumentException();
 
 	    BigDecimal bd = BigDecimal.valueOf(value);
 	    bd = bd.setScale(places, RoundingMode.HALF_UP);
 	    return bd.doubleValue();
-	}	
-	
+	}
+
+
+
+
+
 	
 	
 	

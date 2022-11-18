@@ -1,0 +1,60 @@
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js" integrity="sha512-YHQNqPhxuCY2ddskIbDlZfwY6Vx3L3w9WRbyJCY81xpqLmrM6rL2+LocBgeVHwGY9SXYfQWJ+lcEWx1fKS2s8A==" crossorigin="anonymous" charset="utf-8"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script th:inline="javascript">  
+  		var codFundo = [[${codFundo}]];
+	</script> 
+    
+    <script type="text/javascript">
+    
+      console.log(codFundo)
+      
+      
+	  var jsonData = $.ajax({
+	     url: "retornaDadosGraficoEvolucaoCota.json?codFundo="+codFundo,
+	     dataType: "json",
+	     async: false
+	  }).responseText;      
+      
+      console.log(jsonData);
+      
+      google.charts.load('current', {'packages':['corechart'], 'language': 'pt'});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+    	  
+        //var data = google.visualization.arrayToDataTable();
+        var data = new google.visualization.DataTable();
+
+        data.addColumn('date', 'Data Cotação');
+        data.addColumn('number', 'Evolução da Cota do Fundo');
+        
+       
+        $.each(JSON.parse(jsonData), function (index, row) {
+        	data.addRow([new Date(row.dataCota), parseFloat(row.valorCota)]);
+        	//data.addRow([row.mesAnoCota, row.mesCota]);
+        });        
+        
+        
+        var options = {
+          title: 'Evolução do Valor da Cota do Fundo',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="curve_chart" style="width: 900px; height: 500px"></div>
+  </body>
+  
+  
+  
+  
+</html>

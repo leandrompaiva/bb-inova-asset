@@ -41,7 +41,9 @@
 			        </tr> 			        
 			        <tr>
 			            <td class="bold">Análise Gráfica</td>
-			            <td><a target="_blank" href="fundos/InvestimentoAnaliseGrafica?codFundo={{fundo.codFundoInvestimento}}" class="btn btn-xs btn-primary" role="button">Análise Gráfica</a></td>
+			            <td><a href="#"  onclick="return abrirPopup('fundos/graficoEvolucaoCota?codFundo={{fundo.codFundoInvestimento}}', 850, 550)" class="btn btn-xs btn-primary" role="button">Evolução Cota</a>
+			            	 <a href="#"  onclick="return abrirPopup('fundos/graficoRentabilidade?codFundo={{fundo.codFundoInvestimento}}', 850, 550)" class="btn btn-xs btn-success" role="button">Rentabilidade</a>
+			            </td>
 			        </tr>			        			
 			        
 			    </tbody>
