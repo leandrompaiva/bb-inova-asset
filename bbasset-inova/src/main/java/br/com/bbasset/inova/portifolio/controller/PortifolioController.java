@@ -112,7 +112,7 @@ public class PortifolioController {
 		}
     	
 	
-		return ("portifolio/graficos");
+		return ("portifolio/analiseGrafica");
 	}    
     
     
