@@ -1,0 +1,77 @@
+
+
+.fundoPrincipal {
+	background-color: #002d4c;
+}
+
+
+#wrapper {
+    margin: 0 auto;
+    width: 1024px;
+}
+
+.menuAdministrativo {
+    text-align: right;
+    list-style: none;
+    padding: 5px 5px 0px 0px;
+    font-size: 15px;
+    font-weight: bolder;
+}
+
+.menuAdministrativo:before {
+    content: "[";
+}
+
+.menuAdministrativo:after {
+    content: "]";
+}
+
+.menuAdministrativo > li {
+    display: inline;
+}
+
+.menuAdministrativo > li:before {
+    content: "|";
+    padding-right: 0.3em;
+}
+
+.menuAdministrativo > li:nth-child(1):before {
+    content: "";
+    padding: 0;
+}
+
+
+
+.menu {
+    text-align: center;
+    list-style: none;
+    padding: 0 0 0.5em;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.menu:before {
+    content: "[";
+}
+
+.menu:after {
+    content: "]";
+}
+
+.menu > li {
+    display: inline;
+}
+
+.menu > li:before {
+    content: "|";
+    padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+    content: "";
+    padding: 0;
+}
+
+.bold {
+	font-weight: bold;
+}

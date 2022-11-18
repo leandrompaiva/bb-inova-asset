@@ -1,0 +1,102 @@
+
+
+<div class="container" style="background-color: #fdfdfd;border-radius: 5px;" ng-show="cars.length == 0">
+	 <div class="row">
+		<div class="alert alert-info" >
+		    Não foram localizados fundos de investimento!
+		</div>
+	</div>
+</div>
+
+
+
+<div class="container" style="background-color: #fdfdfd;border-radius: 5px;" ng-repeat="fundo in fundos">
+	 <div class="row">
+		<div class="col-md-6">
+			
+			<h4><b>{{fundo.nomeFundoInvestimento}}</b></h4>
+			
+			
+			<table class="table table-bordered table-striped" ng-show="fundos.length > 0">
+			    <tbody>
+			        
+			        <tr>
+			            <td class="bold">CNPJ</td>
+			            <td>{{fundo.cnpjFundoInvestimento}}</td>
+			        </tr>        
+			
+			        <tr>
+			            <td class="bold">Data de Abertura</td>
+			            <td>{{ fundo.dataAberturaFundoInvestimento | date: 'dd/MM/yyyy' }} </td>
+			        </tr>        
+			        
+			        <tr>
+			            <td class="bold">Risco do Fundo</td>
+			            <td>{{fundo.riscoFundoInvestimento}}</td>
+			        </tr> 
+			        
+			        <tr>
+			            <td class="bold">Status do Fundo</td>
+			            <td>{{fundo.statusFundo}}</td>
+			        </tr> 			        
+			        <tr>
+			            <td class="bold">Análise Gráfica</td>
+			            <td><button class="btn btn-xs btn-primary">Análise Gráfica</button></td>
+			        </tr>			        			
+			        
+			    </tbody>
+			</table>			
+			
+			 
+		</div>
+		
+		<div class="col-md-6">
+			
+			<h4><b>ANÁLISE DO FUNDO</b></h4>
+			
+			
+			<table class="table table-bordered table-striped"  ng-show="fundos.length > 0">
+			    <tbody>
+			        <tr>
+			            <td class="bold">Retorno 12 Meses</td>
+			            <td>{{fundo.retorno12Meses}}</td>
+			        </tr>
+			        
+			        <tr>
+			            <td class="bold">Maior Retorno Mensal</td>
+			            <td>{{fundo.maiorRetornoMensal}}</td>
+			        </tr>        
+			
+			        <tr>
+			            <td class="bold">Menor Retorno Mensal</td>
+			            <td>{{fundo.menorRetornoMensal}}</td>
+			        </tr>        
+			
+			        <tr>
+			            <td class="bold">Meses Positivo</td>
+			            <td>{{fundo.numMesesPositivo}}</td>
+			        </tr> 			
+			
+			        <tr>
+			            <td class="bold">Meses Negativo</td>
+			            <td>{{fundo.numMesesNegativo}}</td>
+			        </tr> 	
+			        		        
+			    </tbody>
+			</table>			
+			
+			 
+		</div>		
+		
+		
+		
+	</div>
+	
+	<hr/>
+	
+</div>
+
+
+
+
+

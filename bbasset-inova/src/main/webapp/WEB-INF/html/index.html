@@ -1,0 +1,71 @@
+<!doctype html>
+<html ng-app="BBAssetApp" xmlns:th="http://www.thymeleaf.org">
+<head>
+    
+    <title>BB Asset - Inova Management</title>
+    <link rel="stylesheet" href="resources/css/app.css"/>
+    <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" />
+</head>
+<body>
+
+
+<div class="container-fluid fundoPrincipal">
+ <div class="row">
+	<div class="col-md-12">
+		<a href="#/fundos"><img src="resources/imagens/topoInova.png" class="img-responsive"/></a>
+	</div>
+</div>
+</div>
+
+<div class="container-fluid">
+ 
+ 
+	 <div class="row">
+		<div class="col-md-12">
+			<ul class="menuAdministrativo">
+		        <li><a href="#/carregarFundosCotacoes">Carregar Fundos e Cotações</a></li>
+		        <li><a href="#/abrirLogDeAcessos">Verificar Logs de Acesso</a></li>
+		    </ul>
+		</div>
+	</div>
+	
+	
+	 <div class="row">
+		<div class="col-md-12">	
+	      	<div class="panel panel-primary">
+	           <div class="panel-heading"><h3>Selecione o Seu Perfil Abaixo</h3> </div>
+	           <div class="panel-body">
+					<ul class="menu">
+				        <li><a href="#/fundosPerfilConservador">Perfil Conservador</a></li>
+				        <li><a href="#/fundosPerfilModerado">Perfil Moderado</a></li>
+				        <li><a href="#/fundosPerfilArrojado">Perfil Arrojado</a></li>
+				    </ul>				
+	           </div>
+	        </div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			 <div ng-view=""></div>
+		</div>
+	</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+<script src="resources/js/lib/angular/angular.js"></script>
+<script src="resources/js/app.js"></script>
+<script src="resources/js/services.js"></script>
+<script src="resources/js/controllers/RouteController.js"></script>
+<script src="resources/js/filters.js"></script>
+<script src="resources/js/directives.js"></script>
+</body>
+</html>
